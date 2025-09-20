@@ -1,22 +1,21 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             agent {
                 docker {
                     image 'node:18'
+                    args '-u 130:130'  // match Jenkins UID:GID
                     reuseNode true
                 }
             }
             steps {
                 sh '''
+                    whoami
+                    id
                     ls -la
-                    node --version
-                    npm --version
                     npm ci
                     npm run build
-                    ls -la
                 '''
             }
         }
