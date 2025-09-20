@@ -5,13 +5,11 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:18-alpine'
+                    image 'node:18'   // full Node image, not Alpine
                     reuseNode true
                 }
             }
             steps {
-                
-
                 sh '''
                     whoami
                     ls -la
