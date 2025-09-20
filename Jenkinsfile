@@ -1,6 +1,12 @@
 agent any
 
 stages {
+     stage('Clean and Checkout') {
+        steps {
+            cleanWs()
+            checkout scm
+        }
+    }
     stage('Build') {
         agent {
             docker {
