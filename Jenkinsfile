@@ -5,15 +5,13 @@ pipeline {
             agent {
                 docker {
                     image 'node:18'
-                    args '-u 130:130'  // match Jenkins UID:GID
+                    args '-u 130:130'
                     reuseNode true
                 }
             }
             steps {
                 sh '''
-    
-                    id
-                    ls -la
+                    npm config set cache /var/lib/jenkins/workspace/test-pipeline/.npm --global
                     npm ci
                     npm run build
                 '''
