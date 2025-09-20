@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    whoami
+    
                     id
                     ls -la
                     npm ci
