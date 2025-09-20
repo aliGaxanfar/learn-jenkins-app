@@ -1,19 +1,25 @@
 pipeline {
     agent any
+
     stages {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:18'
-                    args '-u 130:130'
+                    image 'node:18-alpine'
                     reuseNode true
                 }
             }
             steps {
+                
+
                 sh '''
-                    npm config set cache /var/lib/jenkins/workspace/test-pipeline/.npm --global
-                    npm ci
+                    whoami
+                    ls -la
+                    node --version
+                    npm --version
+                    npm install
                     npm run build
+                    ls -la
                 '''
             }
         }
