@@ -10,8 +10,10 @@ pipeline {
                 }
             }
             steps {
-                cleanWs()
+                
+
                 sh '''
+                    whoami
                     ls -la
                     node --version
                     npm --version
