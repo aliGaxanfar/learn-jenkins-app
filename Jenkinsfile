@@ -13,7 +13,6 @@ pipeline {
                 
 
                 sh '''
-                    whoami
                     ls -la
                     node --version
                     npm --version
