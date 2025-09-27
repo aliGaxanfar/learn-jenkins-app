@@ -1,0 +1,37 @@
+[1mdiff --git a/Jenkinsfile b/Jenkinsfile[m
+[1mindex 76df070..fd800d3 100644[m
+[1m--- a/Jenkinsfile[m
+[1m+++ b/Jenkinsfile[m
+[36m@@ -14,12 +14,28 @@[m [mpipeline {[m
+                     ls -la[m
+                     node --version[m
+                     npm --version[m
+[31m-                    mkdir -p /tmp/.npm[m
+[31m-                    npm ci --cache /tmp/.npm --userconfig /tmp/.npmrc[m
+[32m+[m[32m                    npm ci[m
+                     npm run build[m
+                     ls -la[m
+                 '''[m
+             }[m
+         }[m
+[32m+[m[32m        stage('Test') {[m
+[32m+[m[32m            agent {[m
+[32m+[m[32m                docker {[m
+[32m+[m
+[32m+[m[32m                    image 'node:18-alpine'[m
+[32m+[m[32m                    reuseNode true[m
+[32m+[m[32m                }[m
+[32m+[m[32m                steps {[m
+[32m+[m[32m                    sh '''[m
+[32m+[m[32m                  test -f /build/index.html[m
+[32m+[m[32m                  npm test[m
+[32m+[m[32m                  '''[m
+[32m+[m
+[32m+[m[32m                }[m
+[32m+[m
+[32m+[m[32m            }[m
+[32m+[m[32m        }[m
+     }[m
+[31m-}[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
